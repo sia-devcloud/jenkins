@@ -2,6 +2,8 @@ pipeline{
      agent {
       label 'nop'
      }
+     triggers {
+        pollSCM('* * * * *')
        stages{
         stage('scm'){
             steps{
