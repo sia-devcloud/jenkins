@@ -21,11 +21,11 @@ pipeline {
           } 
 
         }
-        post{
-           success{
-            zip zipFile : 'nop.Web.zip',
-            dir : './published',
-            overwrite : 'true'
+   post{
+     success{
+       zip zipFile : 'nop.Web.zip',
+          dir : './published',
+       overwrite : 'true'
            }
         }
        }
