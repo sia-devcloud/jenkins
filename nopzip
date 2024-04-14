@@ -20,10 +20,10 @@ pipeline {
                         project : 'src/Presentation/Nop.Web/Nop.Web.csproj'
           } 
           post{
-     success{
-       zip zipFile : 'nop.Web.zip',
-          dir : './published',
-       overwrite : 'true'
+               success{
+               zip zipFile: 'nop.Web.zip',
+               dir: './published',
+               overwrite: 'true'
            }
         }
 
