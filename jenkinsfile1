@@ -12,8 +12,8 @@ pipeline{
         stage('build'){
           steps{
           dotnetPublish configuration: 'Release',
-                        outputDirectory: 'published',
-                        project: 'src/Presentation/Nop.Web/Nop.Web.csproj'
+                    outputDirectory: 'published',
+                    project: 'src/Presentation/Nop.Web/Nop.Web.csproj'
           } 
 
         }
