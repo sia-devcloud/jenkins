@@ -6,15 +6,13 @@ pipeline{
         stage('scm'){
             steps{
                git url: 'https://github.com/dummyrepos/nopCommerceApr24.git',
-                   branch: 'develop'
-            }      
+                    branch: 'develop'
+            }
         }
         stage('build'){
           steps{
-          dotnetPublish configuration: 'Release',
-                    outputDirectory: 'published',
-                    project: 'src/Presentation/Nop.Web/Nop.Web.csproj'
-          } 
+           sh 'dotnet publish -o published/ -c Release src/Presentation/Nop.Web/Nop.Web.csproj'
+          }
 
         }
        }
