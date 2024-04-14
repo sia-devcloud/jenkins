@@ -6,7 +6,8 @@ pipeline{
         stage('scm'){
             steps{
                git url: 'https://github.com/dummyrepos/nopCommerceApr24.git',
-            }      branch: 'develop'
+                   branch: 'develop'
+            }      
         }
         stage('build'){
           steps{
