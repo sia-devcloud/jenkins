@@ -20,7 +20,7 @@ pipeline {
             
             post {
                 success {
-                    archiveArtifacts artifacts: './published/Nop.Web',
+                    archiveArtifacts artifacts:  'published/**',
                                       onlyIfSuccessful: true
                 }
             }
