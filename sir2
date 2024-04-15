@@ -20,7 +20,7 @@ pipeline {
             
             post {
                 success {
-                    archiveArtifacts artifacts:  'Nop.Web.dll',
+                    archiveArtifacts artifacts:  'published/**',
                                       onlyIfSuccessful: true
                 }
             }
