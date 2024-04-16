@@ -1,0 +1,26 @@
+pipeline{
+ agent any
+ parameters{
+    choice(
+     name: 'MAVEN',choices: [ 'package', 'clean package'], Description: 'spring'
+    )
+ }
+ stages{
+    stage('git'){
+       steps{
+        git url: 'https://github.com/spring-projects/spring-petclinic.git',
+        branch: 'main'
+       }
+    }
+    stage('build'){
+       steps{
+          mail bcc: '',body: 'The build for the project is started', cc: '', from: '', replyTo: '', subject: 'Build started', to: 'all@shahin.il'
+          sh "mvn ${params.MAVEN}"
+          junint testResults: '**/surefire-reports/*.xml'
+          archive: '**/target/spring-petclinic-*.jar'
+          mail bcc: '', body: 'Build completed', cc: '', from: '', replyTo: '', subject: 'Build completed', to: 'all@shahin.io'
+          
+       }
+    }
+ }
+}
