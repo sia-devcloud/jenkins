@@ -24,6 +24,22 @@ pipeline{
           mail bcc: '', body: 'Build completed', cc: '', from: '', replyTo: '', subject: 'Build completed', to: 'all@shahin.io'
 
        }
+       post{
+          success{
+             mail bcc: 'all@shahin.io',
+                  from: 'jenkins@shahin.io',
+                  to: 'dev@shahin.io',
+                  subject: "build of ${JOB_NAME} with build id ${BUILD_ID} is success",
+                  body: "Refer ${RUN_DISPLAY_URL} here for more info"
+          }
+          failure{
+           mail bcc: 'all@shahin.io',
+                  from: 'jenkins@shahin.io',
+                  to: 'dev@shahin.io',
+                  subject: "build of ${JOB_NAME} with build id ${BUILD_ID} is failed",
+                  body: "Refer ${RUN_DISPLAY_URL} here for more info"
+          }
+       }
     }
  }
 }
