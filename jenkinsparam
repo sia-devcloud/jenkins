@@ -2,7 +2,7 @@ pipeline{
  agent any
  parameters{
     choice(
-     name: 'MAVEN',choices: [ 'package', 'clean package'], Description: 'spring'
+     name: 'MAVEN',choices: [ 'package', 'clean package'], description: 'spring'
     )
  }
  stages{
@@ -19,7 +19,7 @@ pipeline{
           junint testResults: '**/surefire-reports/*.xml'
           archive: '**/target/spring-petclinic-*.jar'
           mail bcc: '', body: 'Build completed', cc: '', from: '', replyTo: '', subject: 'Build completed', to: 'all@shahin.io'
-          
+
        }
     }
  }
