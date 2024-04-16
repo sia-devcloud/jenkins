@@ -1,5 +1,9 @@
 pipeline{
  agent any
+ tools { 
+      maven '/opt/apache-maven-3.9.6' 
+      jdk '/usr/lib/jvm/java-17-openjdk-amd64' 
+    }
  parameters{
     choice(
      name: 'MAVEN', choices: [ 'package', 'clean package'], description: 'spring'
