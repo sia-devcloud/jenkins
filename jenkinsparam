@@ -17,7 +17,7 @@ pipeline{
           mail bcc: '',body: 'The build for the project is started', cc: '', from: '', replyTo: '', subject: 'Build started', to: 'all@shahin.il'
           sh "mvn ${params.MAVEN}"
           junint testResults: '**/surefire-reports/*.xml'
-          archive: '**/target/spring-petclinic-*.jar'
+          archiveArtifacts artifacts: '**/target/spring-petclinic-*.jar'
           mail bcc: '', body: 'Build completed', cc: '', from: '', replyTo: '', subject: 'Build completed', to: 'all@shahin.io'
 
        }
