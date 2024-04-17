@@ -1,19 +1,20 @@
-pipeline{
-     agent {
-      label 'nop'
-     }
-       stages{
-        stage('scm'){
-            steps{
-               git url: 'https://github.com/dummyrepos/nopCommerceApr24.git',
-                    branch: 'develop'
-            }
-        }
-        stage('build'){
-          steps{
-           sh 'dotnet publish -o published/ -c Release src/Presentation/Nop.Web/Nop.Web.csproj'
-          }
+pipeline {
+  agent { label 'spc' }
+  stages {
+	stage('git') {
+		  steps {
+			git url: 'https://github.com/spring-projects/spring-petclinic.git', branch: 'main'
+		  }
+	}
+	stage('build with sonar') {
+		steps {
+			withSonarQubeEnv(credentialsId: 'SONARCLOUD', installationName: 'SONAR_CLOUD') { // You can override the credential to be used
+				sh '/opt/apache-maven-3.9.6/bin/mvn clean package org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar -D sonar.organization=<your-project> -D sonar.projectKey=<your-token>'
+			}
+			junit testResults: '**/surefire-reports/*.xml'
+			archive '**/target/spring-petclinic-*.jar'
+		}
+	}
+	}
+ }
 
-        }
-       }
-}
