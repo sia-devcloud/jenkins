@@ -1,5 +1,7 @@
 pipeline{
- agent any
+ agent{
+   label 'spc'
+ }
  tools { 
       maven "MAVEN_ROOT_3.9.6" 
     }
