@@ -2,9 +2,6 @@ pipeline {
     agent {
         label 'spc'
     }
-    tools {
-        maven 'MAVEN_ROOT_3.9.6'
-    }
     stages {
         stage('scm') {
             steps {
