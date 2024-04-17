@@ -1,23 +1,12 @@
-pipeline{
- agent{
-  label 'spc'
- }
- tools{
-   maven 'MAVEN_ROOT_3.9.6'
- }
-    stages{
-       stage('scm'){
-            steps{
-                git url: 'https://github.com/spring-projects/spring-petclinic.git',
-                    branch: 'main'
-            }
-       }
-       stage('build using sonarqube'){
-             steps{
-                withSonarQubeEnv(credentialsId: 'SONARCLOUD', installationName: 'SONAR_CLOUD') { // You can override the credential to be used
-sh '/opt/apache-maven-3.9.6/bin/mvn clean package org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar -D sonar.organization=<your-project> -D sonar.projectKey=<your-token>'
-                }
-             }   
-       }
-    }
+pipeline {
+   agent {
+      label 'spc'
+   }
+   stages {
+      stage('git') {
+          steps {
+             git url: 'https://github.com/spring-projects/spring-petclinic.git',
+          }
+      }
+   }
 }
