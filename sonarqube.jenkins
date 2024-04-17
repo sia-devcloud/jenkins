@@ -8,7 +8,7 @@ pipeline {
 	}
 	stage('build with sonar') {
 		steps {
-			withSonarQubeEnv(credentialsId: 'SONAR_CLOUD', installationName: 'sonarcloud') { // You can override the credential to be used
+			withSonarQubeEnv(credentialsId: 'SONARCLOUD', installationName: 'SONAR_CLOUD') { // You can override the credential to be used
 				sh '/opt/maven/bin/mvn clean package org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar -D sonar.organization=<your-project> -D sonar.projectKey=<your-token>'
 			}
 			junit testResults: '**/surefire-reports/*.xml'
