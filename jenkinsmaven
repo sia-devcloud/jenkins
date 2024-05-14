@@ -1,0 +1,26 @@
+pipeline{
+ agent any
+ tools { 
+      maven "MAVEN_ROOT_3.9.6" 
+    }
+ parameters{
+    choice(
+     name: 'MAVEN', choices: [ 'package', 'clean package'], description: 'spring'
+    )
+ }
+ stages{
+    stage('git'){
+       steps{
+        git url: 'https://github.com/spring-projects/spring-petclinic.git',
+        branch: 'main'
+       }
+    }
+    stage('build'){
+       steps{
+          sh "mvn ${params.MAVEN}"
+          junit testResults: '**/surefire-reports/*.xml'
+          archiveArtifacts artifacts: '**/target/spring-petclinic-*.jar'
+       }
+    }
+ }
+}
